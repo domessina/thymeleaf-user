@@ -117,7 +117,7 @@
 									<exec>
 										<arg>java</arg>
 										<arg>-jar</arg>
-										<arg>/opt/demo/thymeleaf-login-${project.version}.jar</arg>
+										<arg>/opt/demo/thymeleaf-user-${project.version}.jar</arg>
 									</exec>
 								</entryPoint>
 								<assembly>
