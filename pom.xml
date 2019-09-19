@@ -99,7 +99,7 @@
 
 					<images>
 						<image>
-							<name>thymeleaf-login</name>
+							<name>thymeleaf-user</name>
 							<build>
 								<from>java:8u40</from>
 								<maintainer>domessina</maintainer>
