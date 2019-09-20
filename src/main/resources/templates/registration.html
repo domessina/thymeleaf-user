@@ -103,10 +103,10 @@
                 </div>
                 <div class="form-group"
                      th:classappend="${#fields.hasErrors('terms')}? 'has-error':''">
-                    <input id="terms" th:field="*{terms}" type="checkbox"/>   <label
-                        class="control-label" for="terms"> I agree with the <a
-                        href="#">terms and conditions</a> for Registration.
-                </label>
+                    <input id="terms" th:field="*{terms}" type="checkbox"/>  
+                    <label class="control-label" for="terms">
+                        I agree with the <a href="#">terms and conditions</a> for Registration.
+                    </label>
                     <p class="error-message"
                        th:each="error : ${#fields.errors('terms')}" th:text="${error}">Validation
                         error</p>
