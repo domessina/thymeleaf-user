@@ -28,6 +28,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                             "/css/**",
                             "/img/**",
                             "/webjars/**").permitAll()
+                    .antMatchers("/actuator/**").permitAll() // a token to prometheus can be given
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()
@@ -36,6 +37,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                     .logout()
                         .invalidateHttpSession(true)
+
                         .clearAuthentication(true)
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login?logout");

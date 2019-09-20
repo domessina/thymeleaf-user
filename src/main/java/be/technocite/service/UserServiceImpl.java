@@ -18,6 +18,9 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Autowired
+    private MonitoringService monitoringService;
+
+    @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
     public User findByEmail(String email){
@@ -37,8 +40,10 @@ public class UserServiceImpl implements UserService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email);
         if (user == null){
+            monitoringService.trackLogin(email, false);
             throw new UsernameNotFoundException("Invalid username or password.");
         }
+        monitoringService.trackLogin(email, true);
         return new org.springframework.security.core.userdetails.User(user.getEmail(),
                 user.getPassword(), Collections.emptyList());
     }
