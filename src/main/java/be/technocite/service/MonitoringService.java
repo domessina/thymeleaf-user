@@ -22,24 +22,19 @@ public class MonitoringService {
             // pcq grafana n'autorise les opérations qu'entre la meme métrique. Du coup il faut donner un nom différent ET (voir plus bas)
             // faire ignoringState(true) pour lui dire t'inquiète pas si les tags sont différents. 
             meterRegistry.counter(LOGIN_SUCCESS_RATIO, "state", "success").increment(1);
-        } else {
-            meterRegistry.counter(LOGIN_SUCCESS_RATIO, "state", "failed").increment(1);
         }
+        meterRegistry.counter(LOGIN_SUCCESS_RATIO, "state", "total").increment(1);
     }
     
     /*6 – Dans notre dashboard grafana, on choisit de démarrer une nouvelle query et là il nous reste à écrire celle(s)-ci.
 Une seule métrique est disponible « metric_pet_total » mais en vrai il en existe 3 et celles-ci peuvent être différenciées par leurs labels
 
-metric_pet_total{state="total"}
-metric_pet_total{state="found"}
-metric_pet_total{state="lost"}
+login_success_ratio{state="total"}
+login_success_ratio{state="success"}
 
-Et le plus important, le ratio d’animaux perdus sur le total (en %)
+Et le plus important, le ratio de login success sur le total (en %)
 
-(metric_pet_total{state="lost"} / ignoring(state) metric_pet_total{state="total"})*100
+(login_success_ratio{state="success"} / ignoring(state) login_success_ratio{state="total"})*100
 
-Idem pour les trouvailles
-
-(metric_pet_total{state="found"} / ignoring(state) metric_pet_total{state="total"})*100
 */
 }
